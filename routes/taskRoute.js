@@ -11,7 +11,7 @@ taskRouter.post("/add-task", addtask);
 taskRouter.get("/get-tasks",getTasks);
 
 //Delete  a Task
-taskRouter.delete("/delete-task",deleteTask);
+taskRouter.post("/delete-task",deleteTask);
 
 //Update a Task
 taskRouter.put("/update-task",updateTask);

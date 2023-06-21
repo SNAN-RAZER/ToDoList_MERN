@@ -2,10 +2,30 @@
 import React from 'react'
 import { Button } from "antd";
 import { EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
-const Task = ({ data }) => {
+import TaskModal from './TaskModal';
+import { deleteTask } from '../api/apiCalls';
+import { useNavigate } from 'react-router-dom';
 
+const Task = ({
+ 
+  data,
+  
+  }) => {
+   const navigate = useNavigate();
+  const deleteCurrentTask = async (task)=>{
+    try {
+      const data =await deleteTask(task);
+      console.log(data)
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+    
+
+  }
   const idDisabledClass = `conatiner-text ${data?.completed?'strike':""}`; 
   return (
+    <>
     <div className="conatiner">
        
       <div className={idDisabledClass}>
@@ -13,11 +33,11 @@ const Task = ({ data }) => {
       </div>
 
       <div className="container-buttons">
+        
         <Button className='task-button'>
-          <EditTwoTone className='task-icon'/>
-        </Button>
-        <Button className='task-button'>
-        <DeleteTwoTone  className='task-icon'/>
+        <DeleteTwoTone  className='task-icon'
+        onClick={()=>deleteCurrentTask(data)}
+        />
         </Button>
 
         
@@ -25,8 +45,8 @@ const Task = ({ data }) => {
       </div>
 
       </div>
-      
-
+    
+      </>
 
   )
 }

@@ -7,7 +7,7 @@ const PORT =  process.env.PORT || 6000;
 const db = require('./db');
 const taskRouter = require('./routes/taskRoute');
 app.use(express.json());
-app.use('/api/v1/tasks/', taskRouter);
+app.use('/api/v1/tasks/', cors(), taskRouter);
 
 
 app.listen(PORT, ()=>{

@@ -21,7 +21,8 @@ const addtask = async (req,res)=>{
 //Get task function
 const getTasks = async(req,res)=>{
     try {
-        const tasks = await taskModel.find({}).sort({createdAt: 1});
+        const tasks = await taskModel.find({}).sort({createdAt: -1});
+        console.log(tasks)
         return res.status(200).send({
             message:`${tasks.length>0?(tasks.length >1?"Tasks":"task")+" found":"No tasks available"}`,
             success:true,
@@ -40,6 +41,7 @@ const getTasks = async(req,res)=>{
 const deleteTask = async(req, res)=>{
     try {
         const {_id:id} = req.body;
+        console.log(req.body)
         const task = await taskModel.findOneAndDelete({_id:id});
         return res.status(200).send({
             message:`Task deleted`,
